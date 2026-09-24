@@ -1,0 +1,9 @@
+# Compilación y configuración local
+**/bin/
+**/obj/
+.vs/
+*.user
+*.suo
+
+# Resultados generados
+resultado.txt

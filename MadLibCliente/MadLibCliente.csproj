@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../MadLibServidor/MadLibServidor.csproj" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+  <!-- Compilar el cliente también compila y coloca el servidor a su lado. -->
+  <Target Name="CopiarServidor" AfterTargets="Build">
+    <ItemGroup>
+      <ArchivosServidor Include="../MadLibServidor/bin/$(Configuration)/$(TargetFramework)/**/*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(ArchivosServidor)"
+          DestinationFiles="@(ArchivosServidor->'$(OutDir)Servidor/%(RecursiveDir)%(Filename)%(Extension)')"
+          SkipUnchangedFiles="true" />
+  </Target>
+</Project>
